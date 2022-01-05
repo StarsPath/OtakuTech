@@ -1,0 +1,6 @@
+displayName = Otaku Tech (Honkai Impact)
+author = Alex
+version = 1.2
+hideCode = true
+hideResources = true
+homepage = https://forums.terraria.org/index.php?threads/honkai-impact-3-mod.107037/
