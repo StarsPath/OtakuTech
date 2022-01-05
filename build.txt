@@ -4,3 +4,4 @@ version = 1.2
 hideCode = true
 hideResources = true
 homepage = https://forums.terraria.org/index.php?threads/honkai-impact-3-mod.107037/
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, .git\*
