@@ -10,8 +10,11 @@ namespace OtakuTech.Items.Placeable
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Standard Supply Crate");
-            Tooltip.SetDefault("Chances to obtain coins and upgrade materials");
+            DisplayName.SetDefault("Experimental Supply Crate");
+            Tooltip.SetDefault("Right click to open supply" +
+                "\nExperimental Supply, Gives all items from this mod." +
+                "\nUse for debugging purposes. This mod is still WIP. You are" +
+                "\nwelcomed to use this item to try out all the toys");
         }
 
         public override void SetDefaults()
