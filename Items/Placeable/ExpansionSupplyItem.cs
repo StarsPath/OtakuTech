@@ -52,7 +52,8 @@ namespace OtakuTech.Items.Placeable
                     ModContent.ItemType<VoidWings>(),
                     ModContent.ItemType<CarKey>(),
                     ModContent.ItemType<OathOfJudah>(),
-                    ModContent.ItemType<ObscuringWing>()
+                    ModContent.ItemType<ObscuringWing>(),
+                    ModContent.ItemType<CrusherBunny19C>()
                 };
                 player.QuickSpawnItem(Utils.SelectRandom(Main.rand, lootTable));
             }

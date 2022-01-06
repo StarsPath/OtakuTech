@@ -38,9 +38,11 @@ namespace OtakuTech
         public bool checkCombo = true;
         public float comboTimer = 0f;
         public int comboCount = 0;
-        public int voidConsecutiveHit = 0;
+        //public int voidConsecutiveHit = 0;
+        public int haxxorDroneCount = 0;
+        public int MAX_haxxorDroneCount = 3;
 
-        private int MAX_FEATHER = 20;
+        //private int MAX_FEATHER = 20;
 
 
         public override void ResetEffects()

@@ -31,6 +31,11 @@ namespace OtakuTech.Projectiles
             //drawOriginOffsetY = 20;
         }
 
+        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        {
+            return base.Colliding(projHitbox, targetHitbox);
+        }
+
         public override void AI()
         {
             Player player = Main.player[projectile.owner];

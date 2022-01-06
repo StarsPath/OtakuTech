@@ -53,6 +53,7 @@ namespace OtakuTech.Items.Placeable
                     ModContent.ItemType<HlersSerenity>(),
                     ModContent.ItemType<HekatesGloom>(),
                     ModContent.ItemType<IceEpiphyllum>(),
+                    ModContent.ItemType<HyperRailguns>(),
                 };
                 player.QuickSpawnItem(Utils.SelectRandom(Main.rand, lootTable));
             }
