@@ -31,9 +31,9 @@ namespace OtakuTech.Projectiles
             //drawOriginOffsetY = 20;
         }
 
-        public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
+        public override void ModifyDamageHitbox(ref Rectangle hitbox)
         {
-            return base.Colliding(projHitbox, targetHitbox);
+            base.ModifyDamageHitbox(ref hitbox);
         }
 
         public override void AI()

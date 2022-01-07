@@ -20,8 +20,8 @@ namespace OtakuTech.Projectiles.Minions
         //protected float shootSpeed;
         //protected int shoot;
 
-        private float agroDist = 200f;
-        private float attackRange = 100f;
+        private float agroDist = 400f;
+        private float attackRange = 500f;
         private float movementSpeed = 8f;
 
         private float cooldown = 300f;
@@ -189,14 +189,30 @@ namespace OtakuTech.Projectiles.Minions
                         if (projectile.frame == 9 && currentCD <= 0)
                         {
                             //Main.NewText("SHOOTING");
-                            Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.spriteDirection * 10f, 0, ModContent.ProjectileType<PhantomCleave1>(), projectile.damage, projectile.knockBack, Main.myPlayer, 0f, 0f);
+                            Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.spriteDirection * 20f, 0, ModContent.ProjectileType<PhantomCleave1>(), projectile.damage, projectile.knockBack, Main.myPlayer, 0f, 0f);
                             currentCD = cooldown;
                         }
 
                         if (projectile.frame == 13)
                         {
                             //Main.NewText("SHOOTING2");
-                            Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.spriteDirection * 12f, 0, ModContent.ProjectileType<PhantomCleave2>(), projectile.damage, projectile.knockBack, Main.myPlayer, 0f, 0f);
+                            //Projectile.NewProjectile(projectile.Bottom.X, projectile.Bottom.Y, projectile.spriteDirection * 2f, 0, ModContent.ProjectileType<PhantomCleave3>(), projectile.damage, projectile.knockBack, Main.myPlayer, 8, 3);
+                            Vector2 position = projectile.Center;
+                            float speedX = projectile.spriteDirection * 5f;
+                            float speedY = 0f;
+
+                            int spread = 30; //degrees
+                            float numberProjectiles = 20;
+                            float rotation = MathHelper.ToRadians(spread);
+                            position += Vector2.Normalize(new Vector2(speedX, speedY)) * spread;
+                            //ojectile.NewProjectile(position, new Vector2(speedX, speedY), ModContent.ProjectileType<FeatherBlade>(), damage / 5, knockBack, player.whoAmI);
+                            for (int i = 0; i < numberProjectiles; i++)
+                            {
+                                Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedBy(MathHelper.Lerp(-rotation, rotation, i / (numberProjectiles - 1))) * speedX; // Watch out for dividing by 0 if there is only 1 projectile.
+                                Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, ModContent.ProjectileType<PhantomCleave3>(), projectile.damage / 2, projectile.knockBack, player.whoAmI);
+                            }
+
+                            //Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.spriteDirection * 5f, 0, ModContent.ProjectileType<PhantomCleave2>(), projectile.damage, projectile.knockBack, Main.myPlayer, 0, 0);
                         }
                     }
 
