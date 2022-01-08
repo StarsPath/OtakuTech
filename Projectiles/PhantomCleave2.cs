@@ -12,27 +12,35 @@ namespace OtakuTech.Projectiles
 	public class PhantomCleave2 : ModProjectile
 	{
 		public override void SetStaticDefaults() {
-			DisplayName.SetDefault("PhantomCleave1");
-		}
-
-		public override void SetDefaults() {
-			projectile.width = 144;
-			projectile.height = 56;
-			projectile.friendly = true;
-			projectile.melee = true;
-			projectile.penetrate = -1;
-			projectile.timeLeft = 15;
-			projectile.tileCollide = false;
+			DisplayName.SetDefault("PhantomCleave2");
 			ProjectileID.Sets.TrailCacheLength[projectile.type] = 5;
 			ProjectileID.Sets.TrailingMode[projectile.type] = 0;
 		}
 
-		public override void AI() {
-			projectile.rotation = projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
+		public override void SetDefaults() {
+			projectile.width = 56;
+			projectile.height = 288;
+			projectile.friendly = true;
+			projectile.melee = true;
+			projectile.penetrate = -1;
+			projectile.timeLeft = 45;
+			projectile.tileCollide = false;
+			
+		}
 
-			Dust dust = Dust.NewDustDirect(projectile.position, projectile.width, projectile.height, DustID.IceTorch, -projectile.velocity.X, -projectile.velocity.Y, Scale:3f);
-			dust.noGravity = true;
-			Lighting.AddLight(projectile.Center, 1f, 0.97f, 0.40f);
+		public override void AI() {
+			projectile.alpha += 5;
+			//projectile.direction = (projectile.spriteDirection = ((projectile.velocity.X > 0f) ? 1 : -1));
+			projectile.velocity.X -= projectile.velocity.X * 0.05f;
+			projectile.rotation = projectile.velocity.ToRotation();
+
+			// Since our sprite has an orientation, we need to adjust rotation to compensate for the draw flipping.
+			//if (projectile.spriteDirection == -1)
+			//	projectile.rotation += MathHelper.Pi;
+
+			//Dust dust = Dust.NewDustDirect(projectile.Center, projectile.width, projectile.height, DustID.IceTorch, -projectile.velocity.X, -projectile.velocity.Y, Scale:3f);
+			//dust.noGravity = true;
+			//Lighting.AddLight(projectile.Center, 1f, 0.97f, 0.40f);
 		}
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)

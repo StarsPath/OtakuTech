@@ -21,6 +21,11 @@ namespace OtakuTech.Projectiles.Minions
         //protected int shoot;
 
         private float agroDist = 400f;
+
+        private float XagroDist = 150f;
+        private float YagroDist = 100f;
+        private float maxAllowedPlayerRange = 500f;
+
         private float attackRange = 500f;
         private float movementSpeed = 8f;
 
@@ -88,83 +93,40 @@ namespace OtakuTech.Projectiles.Minions
                 AI_120_StardustGuardian_FindTarget(agroDist, ref targetNPCIndex, ref distanceToTarget);
                 AI_TargetIndex = targetNPCIndex;
 
-                if (AI_TargetIndex != -1 && currentCD <= 0)
+
+                if (targetNPCIndex != -1 && currentCD <= 0)
                 {
-                    AI_State = State_chase;
-                }
-            }
-            else if (AI_State == State_chase)
-            {
-                if (AI_TargetIndex != -1)
-                {
-                    int targetNPCIndex = -1;
-                    float distanceToTarget = 0f;
-                    if (++projectile.frameCounter >= 4)
-                    {
-                        projectile.frameCounter = 0;
-                        if (++projectile.frame >= 3)
-                        {
-                            projectile.frame = 0;
-                        }
-                    }
-
-                    AI_120_StardustGuardian_FindTarget(agroDist, ref targetNPCIndex, ref distanceToTarget);
-                    AI_TargetIndex = targetNPCIndex;
-
-                    if (AI_TargetIndex == -1)
-                    {
-                        AI_State = State_idle;
-                        return;
-                    }
-
                     NPC nPC = Main.npc[targetNPCIndex];
                     projectile.direction = (projectile.spriteDirection = (nPC.Center.X > projectile.Center.X).ToDirectionInt());
                     float num6 = Math.Abs(playerPosition.X - projectile.Center.X);
                     float num7 = Math.Abs(nPC.Center.X - projectile.Center.X);
                     float num8 = Math.Abs(playerPosition.Y - projectile.Center.Y);
-                    float num9 = Math.Abs(nPC.Bottom.Y - projectile.Bottom.Y);
+                    float num9 = Math.Abs(nPC.Center.Y - projectile.Bottom.Y);
                     float num10 = (nPC.Center.Y > projectile.Bottom.Y).ToDirectionInt();
-                    if ((num6 < agroDist || (playerPosition.X - projectile.Center.X) * (float)projectile.direction < 0f))
+                    if ((num6 < XagroDist || (playerPosition.X - projectile.Center.X) * (float)projectile.direction < 0f) && num7 > 20f && num7 < XagroDist - num6 + 100f)
                     {
-                        projectile.velocity.X += 1f * (float)projectile.direction;
+                        projectile.velocity.X += 0.1f * (float)projectile.direction;
                     }
                     else
                     {
                         projectile.velocity.X *= 0.7f;
                     }
-                    if ((num8 < agroDist || (playerPosition.Y - projectile.Bottom.Y) * num10 < 0f))
+                    if ((num8 < YagroDist || (playerPosition.Y - projectile.Bottom.Y) * num10 < 0f) && num9 > 10f && num9 < YagroDist - num8 + 10f)
                     {
-                        projectile.velocity.Y += 1f * num10;
+                        projectile.velocity.Y += 0.1f * num10;
                     }
                     else
                     {
                         projectile.velocity.Y *= 0.7f;
                     }
+                    if (projectile.owner == Main.myPlayer && num7 < maxAllowedPlayerRange)
+                    {
+                        projectile.ai[0] = State_attack;
+                        projectile.ai[1] = targetNPCIndex;
+                        projectile.netUpdate = true;
+                    }
+                }
 
-                    NPC targetNPC = Main.npc[targetNPCIndex];
-                    if (player.Distance(projectile.Center) > 1.4f * agroDist || AI_TargetIndex == -1)
-                    {
-                        //Main.NewText("Out of Range, Idle State");
-                        AI_State = State_idle;
-                        AI_TargetIndex = -1;
-                    }
-                    else if (projectile.Distance(targetNPC.Center) < attackRange)
-                    {
-                        AI_State = State_attack;
-                        //Main.NewText("In Attack Range, StateAttack");
-                    }
-                    //else
-                    //{
-                    //    Main.NewText("Moving to NPC");
-                    //    Vector2 dir = targetNPC.Bottom - projectile.Bottom;
-                    //    dir.Normalize();
-                    //    projectile.velocity = dir * movementSpeed;
-                    //}
-                }
-                else
-                {
-                    AI_State = State_idle;
-                }
             }
             else if (AI_State == State_attack)
             {
@@ -206,13 +168,12 @@ namespace OtakuTech.Projectiles.Minions
                             float rotation = MathHelper.ToRadians(spread);
                             position += Vector2.Normalize(new Vector2(speedX, speedY)) * spread;
                             //ojectile.NewProjectile(position, new Vector2(speedX, speedY), ModContent.ProjectileType<FeatherBlade>(), damage / 5, knockBack, player.whoAmI);
+                            Projectile.NewProjectile(position, new Vector2(speedX * 4f, speedY), ModContent.ProjectileType<PhantomCleave2>(), projectile.damage, projectile.knockBack, Main.myPlayer, 0, 0);
                             for (int i = 0; i < numberProjectiles; i++)
                             {
                                 Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedBy(MathHelper.Lerp(-rotation, rotation, i / (numberProjectiles - 1))) * speedX; // Watch out for dividing by 0 if there is only 1 projectile.
-                                Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, ModContent.ProjectileType<PhantomCleave3>(), projectile.damage / 2, projectile.knockBack, player.whoAmI);
+                                Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X * projectile.spriteDirection, perturbedSpeed.Y, ModContent.ProjectileType<PhantomCleave3>(), projectile.damage / 2, projectile.knockBack, player.whoAmI);
                             }
-
-                            //Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.spriteDirection * 5f, 0, ModContent.ProjectileType<PhantomCleave2>(), projectile.damage, projectile.knockBack, Main.myPlayer, 0, 0);
                         }
                     }
 
