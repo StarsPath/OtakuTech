@@ -4,6 +4,8 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
+using OtakuTech.Buffs;
+using OtakuTech.Projectiles;
 
 namespace OtakuTech.Items.Weapons.FiveStars
 {
@@ -14,6 +16,8 @@ namespace OtakuTech.Items.Weapons.FiveStars
 				"\n[c/AF4BFF:the powers of her stigma. This razor sharp weapon]" +
 				"\n[c/AF4BFF:of terror is a stark contrast to the quiet and shy little girl.]");
 		}
+
+		private int undineCD = 25 * 60;
 
 		public override void SetDefaults() {
 			item.damage = 175;
@@ -29,36 +33,39 @@ namespace OtakuTech.Items.Weapons.FiveStars
 			item.value = 10000;
 			item.rare = ItemRarityID.Purple;
 			item.UseSound = SoundID.Item1;
-			item.autoReuse = true;
+			item.shoot = ModContent.ProjectileType<Projectiles.SereneReaper>();
+			item.autoReuse = false;
 			item.useTurn = true;
 			item.shootSpeed = 8f;
+
 		}
 
-		public override bool AltFunctionUse(Player player) {
+        public override bool AltFunctionUse(Player player) {
 			return true;
 		}
 
 		public override bool CanUseItem(Player player) {
 			ModdedPlayer moddedPlayer = player.GetModPlayer<ModdedPlayer>();
 			if (player.altFunctionUse == 2) {
-				item.useStyle = ItemUseStyleID.HoldingOut;
+				if (moddedPlayer.undineCD > 0)
+					return false;
 				item.useTime = 20;
 				item.useAnimation = 20;
 				item.reuseDelay = 30;
-				item.damage = 189;
-				item.noUseGraphic = true;
-				item.shoot = ModContent.ProjectileType<Projectiles.TestProjectile>();
-
-                Main.PlaySound(SoundID.Item100);
+				item.autoReuse = false;
+				item.noUseGraphic = false;
+				item.shoot = ModContent.ProjectileType<FlutteringRipple>();
+				moddedPlayer.undineCD = undineCD;
+				player.AddBuff(ModContent.BuffType<VelionasTorrent>(), 4 * 60);
 			}
 			else
 			{
+				item.autoReuse = moddedPlayer.velionasTorrent ? true : false;
 				item.useStyle = ItemUseStyleID.SwingThrow;
-				item.useTime = 30;
-				item.useAnimation = 30;
-				item.reuseDelay = 0;
-				item.damage = 189;
-				item.shoot = ProjectileID.None;
+				item.useTime = 15;
+				item.useAnimation = 15;
+				item.reuseDelay = 5;
+				item.shoot = moddedPlayer.velionasTorrent ? ModContent.ProjectileType<SereneReaper2>() : ModContent.ProjectileType<SereneReaper>();
 				item.noUseGraphic = false;
 
 				//Main.PlaySound(SoundID.Item100);
@@ -68,32 +75,23 @@ namespace OtakuTech.Items.Weapons.FiveStars
 		}
         public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         {
-            return base.Shoot(player, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
+			return base.Shoot(player, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
         }
 
-   //     public override void MeleeEffects(Player player, Rectangle hitbox)
-   //     {
-			//int dust = Dust.NewDust(hitbox.Center.ToVector2() - new Vector2(hitbox.Width/2, hitbox.Height/2), hitbox.Width, hitbox.Height, DustID.Fire);
-			//Main.dust[dust].noGravity = true;
-			////Main.dust[dust].fadeIn = 1f;
-			//Main.dust[dust].scale = 1.5f;
-			//base.MeleeEffects(player, hitbox);
-   //     }
-
-		//public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
-		//{
-		//	Player player = Main.player[item.owner];
-		//	ModdedPlayer modPlayer = player.GetModPlayer<ModdedPlayer>();
-		//	if (modPlayer.libationCD > 0)
-		//	{
-		//		float percentCd = modPlayer.libationCD / libationCD;
-		//		Vector2 center = position + new Vector2(frame.Width / 2 * scale, frame.Height / 2 * scale);
-		//		Vector2 position2 = center - Main.cdTexture.Size() * Main.inventoryScale / 2f;
-		//		Color white = Color.White;
-		//		//spriteBatch.Draw(Main.cdTexture, position2, null, white, 0f, origin, Main.inventoryScale, SpriteEffects.None, 0f);
-		//		spriteBatch.Draw(ModLoader.GetMod("OtakuTech").GetTexture("Other/Cooldown-2"), position2, null, new Color(percentCd, percentCd, percentCd, percentCd), 0f, origin, Main.inventoryScale, SpriteEffects.None, 0f);
-		//	}
-		//	base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
-		//}
+		public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
+		{
+			Player player = Main.player[item.owner];
+			ModdedPlayer modPlayer = player.GetModPlayer<ModdedPlayer>();
+			if (modPlayer.undineCD > 0)
+			{
+				float percentCd = modPlayer.undineCD / undineCD;
+				Vector2 center = position + new Vector2(frame.Width / 2 * scale, frame.Height / 2 * scale);
+				Vector2 position2 = center - Main.cdTexture.Size() * Main.inventoryScale / 2f;
+				Color white = Color.White;
+				//spriteBatch.Draw(Main.cdTexture, position2, null, white, 0f, origin, Main.inventoryScale, SpriteEffects.None, 0f);
+				spriteBatch.Draw(ModLoader.GetMod("OtakuTech").GetTexture("Other/Cooldown-2"), position2, null, new Color(percentCd, percentCd, percentCd, percentCd), 0f, origin, Main.inventoryScale, SpriteEffects.None, 0f);
+			}
+			base.PostDrawInInventory(spriteBatch, position, frame, drawColor, itemColor, origin, scale);
+		}
 	}
 }

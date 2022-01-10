@@ -29,11 +29,13 @@ namespace OtakuTech
         public bool libationToFire;
         public bool excelsisKing;
         public bool fervent;
+        public bool velionasTorrent;
 
         public bool enchanced = false;
 
         public float voidTeleportCD = 0;
         public float libationCD = 0;
+        public float undineCD = 0;
 
         public bool checkCombo = true;
         public float comboTimer = 0f;
@@ -51,6 +53,7 @@ namespace OtakuTech
             libationToFire = false;
             excelsisKing = false;
             fervent = false;
+            velionasTorrent = false;
         }
         public override void UpdateDead()
         {
@@ -58,6 +61,7 @@ namespace OtakuTech
             libationToFire = false;
             excelsisKing = false;
             fervent = false;
+            velionasTorrent = false;
             base.UpdateDead();
         }
         public override void PostItemCheck()
@@ -66,8 +70,10 @@ namespace OtakuTech
                 enchanced = true;
             else
                 enchanced = false;
+
             base.PostItemCheck();
         }
+
 
         //public override void OnHitNPCWithProj(Projectile proj, NPC target, int damage, float knockback, bool crit)
         //{
@@ -95,6 +101,8 @@ namespace OtakuTech
                 voidTeleportCD -= 1;
             if (libationCD > 0)
                 libationCD -= 1;
+            if (undineCD > 0)
+                undineCD -= 1;
             base.PostUpdate();
         }
         public void addCombo(int count = 1)

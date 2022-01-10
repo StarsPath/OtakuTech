@@ -34,7 +34,7 @@ namespace OtakuTech.Items.Weapons.FiveStars
             item.knockBack = 4; // Sets the item's knockback. Note that projectiles shot by this weapon will use its and the used ammunition's knockback added together.
             item.value = 10000; // how much the item sells for (measured in copper)
             item.rare = ItemRarityID.Purple; // the color that the item's name will be in-game
-            item.UseSound = SoundID.Item41; // The sound that this item plays when used.
+            //item.UseSound = SoundID.Item40; // The sound that this item plays when used.
             item.autoReuse = true; // if you can hold click to automatically use it again
             item.shoot = ProjectileID.Bullet;
             //item.shoot = ModContent.ProjectileType<FeatherBlade>();
@@ -64,6 +64,11 @@ namespace OtakuTech.Items.Weapons.FiveStars
 
             }
             return base.CanUseItem(player);
+        }
+        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        {
+            Main.PlaySound(SoundID.Item40);
+            return base.Shoot(player, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
         }
         //public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         //{
