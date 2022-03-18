@@ -45,5 +45,10 @@ namespace OtakuTech
             RecipeGroup.RegisterGroup("OtakuTech:LargeGems", LargeGems);
             //base.AddRecipeGroups();
         }
+
+        public override void Unload()
+        {
+            base.Unload();
+        }
     }
 }
