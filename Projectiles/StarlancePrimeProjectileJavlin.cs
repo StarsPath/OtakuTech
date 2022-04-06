@@ -5,10 +5,10 @@ using Terraria.ModLoader;
 
 namespace OtakuTech.Projectiles
 {
-	public class HlersSerenityProjectileJavlin : ModProjectile
+	public class StarlancePrimeProjectileJavlin : ModProjectile
 	{
 		public override void SetStaticDefaults() {
-			DisplayName.SetDefault("HlersSerenityProjectileJavlin");
+			DisplayName.SetDefault("StarlancePrimeProjectileJavlin");
 		}
 
 		public override void SetDefaults() {
@@ -22,6 +22,7 @@ namespace OtakuTech.Projectiles
 			projectile.melee = true;
 			projectile.tileCollide = true;
 			projectile.friendly = true;
+			projectile.scale = 1.5f;
 		}
 
         public override void AI()

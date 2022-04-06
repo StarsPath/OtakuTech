@@ -30,6 +30,7 @@ namespace OtakuTech
         public bool excelsisKing;
         public bool fervent;
         public bool velionasTorrent;
+        public bool eightFormations;
 
         public bool enchanced = false;
 
@@ -42,7 +43,7 @@ namespace OtakuTech
         public int comboCount = 0;
         //public int voidConsecutiveHit = 0;
         public int haxxorDroneCount = 0;
-        public int MAX_haxxorDroneCount = 3;
+        public int MAX_haxxorDroneCount = 2;
 
         //private int MAX_FEATHER = 20;
 
@@ -54,6 +55,7 @@ namespace OtakuTech
             excelsisKing = false;
             fervent = false;
             velionasTorrent = false;
+            eightFormations = false;
         }
         public override void UpdateDead()
         {
@@ -62,6 +64,7 @@ namespace OtakuTech
             excelsisKing = false;
             fervent = false;
             velionasTorrent = false;
+            eightFormations = false;
             base.UpdateDead();
         }
         public override void PostItemCheck()

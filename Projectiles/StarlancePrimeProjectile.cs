@@ -4,10 +4,10 @@ using Terraria.ModLoader;
 
 namespace OtakuTech.Projectiles
 {
-	public class HlersSerenityProjectile : ModProjectile
+	public class StarlancePrimeProjectile : ModProjectile
 	{
 		public override void SetStaticDefaults() {
-			DisplayName.SetDefault("HlersSerenityProjectile");
+			DisplayName.SetDefault("StarlancePrimeProjectile");
 		}
 
 		public override void SetDefaults() {
@@ -23,6 +23,8 @@ namespace OtakuTech.Projectiles
 			projectile.melee = true;
 			projectile.tileCollide = false;
 			projectile.friendly = true;
+
+			projectile.scale = 1.5f;
 		}
 
 		// In here the AI uses this example, to make the code more organized and readable
@@ -49,16 +51,16 @@ namespace OtakuTech.Projectiles
 			if (!projOwner.frozen) {
 				if (movementFactor == 0f) // When initially thrown out, the ai0 will be 0f
 				{
-					movementFactor = 3f; // Make sure the spear moves forward when initially thrown out
+					movementFactor = 2.5f; // Make sure the spear moves forward when initially thrown out
 					projectile.netUpdate = true; // Make sure to netUpdate this spear
 				}
 				if (projOwner.itemAnimation < projOwner.itemAnimationMax / 3) // Somewhere along the item animation, make sure the spear moves back
 				{
-					movementFactor -= 2.4f;
+					movementFactor -= 2f;
 				}
 				else // Otherwise, increase the movement factor
 				{
-					movementFactor += 2.1f;
+					movementFactor += 2f;
 				}
 			}
 			// Change the spear position based off of the velocity and the movementFactor
