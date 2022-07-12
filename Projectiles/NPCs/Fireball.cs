@@ -16,12 +16,13 @@ namespace OtakuTech.Projectiles.NPCs
 		}
 
 		public override void SetDefaults() {
-			projectile.width = 128;
-			projectile.height = 128;
+			projectile.width = 96;
+			projectile.height = 96;
 			projectile.hostile = true;
 			projectile.melee = true;
 			projectile.penetrate = -1;
 			projectile.timeLeft = 5 * 60;
+			//projectile.scale = 0.8f;
    //         ProjectileID.Sets.TrailCacheLength[projectile.type] = 5;
 			//ProjectileID.Sets.TrailingMode[projectile.type] = 0;
 		}

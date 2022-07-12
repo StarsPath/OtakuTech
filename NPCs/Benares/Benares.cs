@@ -70,9 +70,9 @@ namespace OtakuTech.NPCs.Benares
             npc.width = 100;
             npc.height = 240;
             npc.aiStyle = -1; // This npc has a completely unique AI, so we set this to -1. The default aiStyle 0 will face the player, which might conflict with custom AI code.
-            npc.damage = 80;
-            npc.defense = 20;
-            npc.lifeMax = 500000;
+            npc.damage = 150;
+            npc.defense = 100;
+            npc.lifeMax = 50000;
             npc.knockBackResist = 0f;
             npc.HitSound = SoundID.NPCHit1;
             npc.DeathSound = SoundID.NPCDeath1;
@@ -86,12 +86,19 @@ namespace OtakuTech.NPCs.Benares
             //npc.color = new Color(0, 80, 255, 100);
             //npc.value = 25f;
             drawOffsetY = 30;
+
+            npc.buffImmune[BuffID.Confused] = true;
         }
         /*public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
             // we would like this npc to spawn in the overworld.
             return SpawnCondition.OverworldDay.Chance * 0.25f;
         }*/
+        public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+        {
+            bossLifeScale = 1 + (0.2f * numPlayers);
+            base.ScaleExpertStats(numPlayers, bossLifeScale);
+        }
 
         public override void NPCLoot()
         {
@@ -175,7 +182,7 @@ namespace OtakuTech.NPCs.Benares
                     if (AI_Timer % fireball_interval_time == 0)
                     {
                         if(dir != Vector2.Zero)
-                            Projectile.NewProjectile(npc.Top, dir * fireball_shootSpeed, ModContent.ProjectileType<Projectiles.NPCs.Fireball>(), npc.damage, 0.1f, npc.whoAmI);
+                            Projectile.NewProjectile(npc.Top, dir * fireball_shootSpeed, ModContent.ProjectileType<Projectiles.NPCs.Fireball>(), (int)(npc.damage * 0.5f), 0.1f, npc.whoAmI);
                     }
                 }
 
@@ -209,7 +216,7 @@ namespace OtakuTech.NPCs.Benares
                             {
                                 Vector2 perturbedSpeed = (dir * lightningball_shootSpeed).RotatedBy(MathHelper.Lerp(-rotation, rotation, i / (lightningball_count - 1))); // Watch out for dividing by 0 if there is only 1 projectile.
                                 //Projectile.NewProjectile(position.X, position.Y, perturbedSpeed.X, perturbedSpeed.Y, type, damage / 2, knockBack, player.whoAmI);
-                                Projectile.NewProjectile(npc.Top.X, npc.Top.Y, perturbedSpeed.X, perturbedSpeed.Y, ModContent.ProjectileType<Projectiles.NPCs.LightningBall>(), (int)(npc.damage/ lightningball_count), 0.1f, npc.whoAmI);
+                                Projectile.NewProjectile(npc.Top.X, npc.Top.Y, perturbedSpeed.X, perturbedSpeed.Y, ModContent.ProjectileType<Projectiles.NPCs.LightningBall>(), (int)(npc.damage/ lightningball_count * 0.5f), 0.1f, npc.whoAmI);
                             }
                         }
                             //Projectile.NewProjectile(npc.Top, dir * lightningball_shootSpeed, ModContent.ProjectileType<Projectiles.NPCs.LightningBall>(), npc.damage, 0.1f, npc.whoAmI);
