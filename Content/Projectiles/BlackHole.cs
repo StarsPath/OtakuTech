@@ -38,7 +38,7 @@ namespace OtakuTech.Content.Projectiles
 					Vector2 dirTo = npc.position - Projectile.Center;
 					dirTo.Normalize();
 					npc.velocity -= (dirTo * pullForce);
-					npc.velocity *= 0.9f;
+					npc.velocity *= 0.90f;
                 }
             }
 			//int dust = Dust.NewDust(projectile.position, projectile.width, projectile.height, DustID.TopazBolt);
