@@ -10,4 +10,14 @@
   <ItemGroup>
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
+    <Folder Include="Common\Players\" />
+    <Folder Include="Content\Buffs\" />
+    <Folder Include="Content\Mounts\" />
+    <Folder Include="Content\NPCs\" />
+    <Folder Include="Content\Tiles\" />
+    <Folder Include="Content\Projectiles\" />
+    <Folder Include="Localization\" />
+  </ItemGroup>
 </Project>

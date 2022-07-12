@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "RQR0KPEb8+g9o41m42R+GCUl8xqeSAltjVzDXScvBzNVdBkjsI6x4KKhcRJxJwH9vAl0eS6nY4+4tQFlGKORMA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\liuxi\\OneDrive\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\OtakuTech\\OtakuTech.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\liuxi\\.nuget\\packages\\tmodloader.codeassist\\0.1.5\\tmodloader.codeassist.0.1.5.nupkg.sha512"
+  ],
+  "logs": []
+}
