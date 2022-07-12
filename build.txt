@@ -1,7 +1,3 @@
-displayName = Otaku Tech (Honkai Impact)
+displayName = Honkai Impact
 author = Alex
-version = 1.2.1
-hideCode = true
-hideResources = true
-homepage = https://forums.terraria.org/index.php?threads/honkai-impact-3-mod.107037/
-buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, .git\*
+version = 0.1
