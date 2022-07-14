@@ -83,7 +83,7 @@ namespace OtakuTech.Content.Items.Weapons.PRI
 				}
 				
 
-				//player.AddBuff(ModContent.BuffType<Buffs.LibationToFire>(), 300);
+				player.AddBuff(ModContent.BuffType<Buffs.LibationToFire>(), 300);
 
                 SoundEngine.PlaySound(SoundID.Item100);
 /*                int dust = Dust.NewDust(player.position, player.width, player.height, DustID.Fire);

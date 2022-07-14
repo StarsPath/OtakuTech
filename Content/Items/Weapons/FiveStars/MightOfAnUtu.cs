@@ -60,6 +60,8 @@ namespace OtakuTech.Content.Items.Weapons.FiveStars
 
 				moddedPlayer.libationCD = libationCD;
 
+				player.AddBuff(ModContent.BuffType<Buffs.LibationToFire>(), 300);
+
 			}
 			else
             {
