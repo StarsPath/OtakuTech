@@ -17,7 +17,7 @@ namespace OtakuTech.Content.Items.Weapons.FiveStars
 		public override void SetDefaults() {
 			Item.damage = 169;
 			Item.crit = 30;
-			Item.scale = 1.25f;
+			Item.scale = 1.2f;
 			Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
 			Item.width = 24;
 			Item.height = 24;

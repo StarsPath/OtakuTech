@@ -11,9 +11,10 @@
     <PackageReference Include="tModLoader.CodeAssist" Version="0.1.*" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\" />
+    <Folder Include="Assets\Textures\Other\" />
     <Folder Include="Common\Players\" />
     <Folder Include="Content\Buffs\" />
+    <Folder Include="Content\Items\Weapons\PRI\" />
     <Folder Include="Content\Mounts\" />
     <Folder Include="Content\NPCs\" />
     <Folder Include="Content\Tiles\" />

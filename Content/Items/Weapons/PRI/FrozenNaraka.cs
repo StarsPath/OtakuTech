@@ -22,7 +22,7 @@ namespace OtakuTech.Content.Items.Weapons.PRI
 		public override void SetDefaults() {
 			Item.damage = 283;
 			Item.crit = 24;
-			Item.scale = 1.25f;
+			Item.scale = 1.2f;
 			Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
 			Item.width = 24;
 			Item.height = 24;
@@ -40,58 +40,44 @@ namespace OtakuTech.Content.Items.Weapons.PRI
 			//item.shootSpeed = 5f;
 		}
 
-		//public override void AddRecipes() {
-		//	Recipe recipe = CreateRecipe();
-		//	recipe.AddIngredient(ModContent.ItemType<IceEpiphyllum>());
-		//	recipe.AddIngredient(ModContent.ItemType<EinsteinsTorus>(), 10);
-		//	recipe.AddIngredient(ModContent.ItemType<SCMetalH2>(), 10);
-		//	recipe.AddIngredient(ModContent.ItemType<Nanoceramic>(), 10);
-		//	recipe.AddTile(ModContent.TileType<ProgramingStation>());
-		//	recipe.Register();
-		//}
+        //public override void AddRecipes() {
+        //	Recipe recipe = CreateRecipe();
+        //	recipe.AddIngredient(ModContent.ItemType<IceEpiphyllum>());
+        //	recipe.AddIngredient(ModContent.ItemType<EinsteinsTorus>(), 10);
+        //	recipe.AddIngredient(ModContent.ItemType<SCMetalH2>(), 10);
+        //	recipe.AddIngredient(ModContent.ItemType<Nanoceramic>(), 10);
+        //	recipe.AddTile(ModContent.TileType<ProgramingStation>());
+        //	recipe.Register();
+        //}
 
-		public override bool AltFunctionUse(Player player) {
+        public override bool AltFunctionUse(Player player) {
 			return true;
 		}
 
-        public override bool? UseItem(Player player)
+        public override bool CanUseItem(Player player)
         {
-			if (player.altFunctionUse == 2)
-			{
-				Item.noMelee = true;
+            if (player.altFunctionUse == 2)
+            {
+				Item.useStyle = ItemUseStyleID.Guitar;
+				Item.noUseGraphic = true;
+                Item.noMelee = true;
 				Item.useTime = 16;
-				Item.useAnimation = 16;
-				Item.shoot = ModContent.ProjectileType<InstantDraw>();
-			}
-			else
-			{
+                Item.useAnimation = 16;
+                Item.shoot = ModContent.ProjectileType<InstantDraw>();
+            }
+            else
+            {
+				Item.useStyle = ItemUseStyleID.Swing;
+				Item.noUseGraphic = false;
 				Item.noMelee = false;
-				//item.useStyle = ItemUseStyleID.SwingThrow;
-				Item.useTime = 16;
-				Item.useAnimation = 16;
-				Item.shoot = ProjectileID.None;
-			}
-			return base.UseItem(player);
+                Item.useTime = 16;
+                Item.useAnimation = 16;
+                //Item.shoot = ProjectileID.None;
+            }
+            return base.CanUseItem(player);
         }
 
-  //      public override bool CanUseItem(Player player) {
-		//	if (player.altFunctionUse == 2) {
-		//		Item.noMelee = true;
-		//		Item.useTime = 16;
-		//		Item.useAnimation = 16;
-		//		Item.shoot = ModContent.ProjectileType<InstantDraw>();
-		//	}
-		//	else {
-		//		Item.noMelee = false;
-		//		//item.useStyle = ItemUseStyleID.SwingThrow;
-		//		Item.useTime = 16;
-		//		Item.useAnimation = 16;
-		//		Item.shoot = ProjectileID.None;
-		//	}
-		//	return base.CanUseItem(player);
-		//}
-
-		public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit) {
+        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit) {
 			target.AddBuff(BuffID.Frostburn, 300);
 		}
 
@@ -112,30 +98,32 @@ namespace OtakuTech.Content.Items.Weapons.PRI
 
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-			NPC[] targetNPC = FindNearest(player.position, 3);
-			//mod.Logger.Info(targetNPC);
-			if(targetNPC[0] == null)
-            {
-                if (Vector2.Distance(player.position, Main.MouseWorld) < shootDist)
-                {
-					position = Main.MouseWorld;
-                }
-                else
-                {
-					Vector2 dir = player.position - Main.MouseWorld;
-					dir.Normalize();
-					position = player.position - (dir * shootDist);
+			if(player.altFunctionUse == 2){
+				NPC[] targetNPC = FindNearest(player.position, 3);
+				//mod.Logger.Info(targetNPC);
+				if (targetNPC[0] == null)
+				{
+					if (Vector2.Distance(player.position, Main.MouseWorld) < shootDist)
+					{
+						position = Main.MouseWorld;
+					}
+					else
+					{
+						Vector2 dir = player.position - Main.MouseWorld;
+						dir.Normalize();
+						position = player.position - (dir * shootDist);
+					}
+					Projectile.NewProjectile(source, position, default, Item.shoot, damage, knockback, player.whoAmI);
 				}
-				Projectile.NewProjectile(source, position, default, Item.shoot, damage, knockback, player.whoAmI);
-			}
-            else
-            {
-				for (int i = 0; i < targetNPC.Length; i++)
-                {
-					if (targetNPC[i] != null)
-						Projectile.NewProjectile(source, targetNPC[i].Center, default, Item.shoot, damage, knockback, player.whoAmI);
-                }
-				//position = targetNPC[0].Center;
+				else
+				{
+					for (int i = 0; i < targetNPC.Length; i++)
+					{
+						if (targetNPC[i] != null)
+							Projectile.NewProjectile(source, targetNPC[i].Center, default, Item.shoot, damage, knockback, player.whoAmI);
+					}
+					//position = targetNPC[0].Center;
+				}
 			}
 			return false;
             //return base.Shoot(player, source, position, velocity, type, damage, knockback);
