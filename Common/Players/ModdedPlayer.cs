@@ -109,5 +109,15 @@ namespace OtakuTech.Common.Players
             comboCount += count;
             comboTimer = 90f;
         }
+
+        public bool resetCombo(int limit)
+        {
+            if (comboCount >= limit)
+            { 
+                comboCount = 0;
+                return true;
+            }
+            return false;
+        }
     }
 }
