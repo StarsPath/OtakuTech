@@ -3,6 +3,8 @@
 //using OtakuTech.NPCs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using OtakuTech.Content.Items.Weapons.FiveStars;
+using OtakuTech.Content.Items.Weapons.PRI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -66,9 +68,11 @@ namespace OtakuTech.Common.Players
         public override void PostItemCheck()
         {
             //if (Player.HeldItem.ModItem is HekatesSombre || Player.HeldItem.ModItem is DomainOfVoid)
-            //    enchanced = true;
-            //else
-            //    enchanced = false;
+            if(Player.HeldItem.ModItem is DomainOfVoid ||
+                Player.HeldItem.ModItem is KeyOfOblivion)
+                enchanced = true;
+            else
+                enchanced = false;
 
             base.PostItemCheck();
         }

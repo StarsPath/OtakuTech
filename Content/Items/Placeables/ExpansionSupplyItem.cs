@@ -53,7 +53,10 @@ namespace OtakuTech.Content.Items.Placeables
                     //ModContent.ItemType<CarKey>(),
                     ModContent.ItemType<OathOfJudah>(),
                     ModContent.ItemType<ObscuringWing>(),
-                    ModContent.ItemType<CrusherBunny19C>()
+                    ModContent.ItemType<CrusherBunny19C>(),
+                    ModContent.ItemType<SentienceChain>(),
+                    ModContent.ItemType<SentienceSpear>(),
+                    ModContent.ItemType<SentienceSword>()
                 };
                 player.QuickSpawnItem(new EntitySource_ItemOpen(player, ModContent.ItemType<ExpansionSupplyItem>()), Utils.SelectRandom(Main.rand, lootTable)); ;
             }
