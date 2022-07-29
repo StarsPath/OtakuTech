@@ -56,7 +56,7 @@ namespace OtakuTech.Content.Items.Weapons.FiveStars
                 if (moddedPlayer.haxxorDroneCount < moddedPlayer.MAX_haxxorDroneCount)
                 {
                     moddedPlayer.haxxorDroneCount++;
-                    int p = Projectile.NewProjectile(new EntitySource_ItemUse(player, Item), player.Center, default, ModContent.ProjectileType<HaxxorDrones>(), Item.damage / 2, Item.knockBack, Owner: player.whoAmI);
+                    Projectile p = Projectile.NewProjectileDirect(new EntitySource_ItemUse_WithAmmo(player, Item, AmmoID.None), player.Center, default, ModContent.ProjectileType<HaxxorDrones>(), 20, Item.knockBack, player.whoAmI);
                 }
 
             }

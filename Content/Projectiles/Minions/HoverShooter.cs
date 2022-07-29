@@ -17,6 +17,9 @@ namespace OtakuTech.Projectiles.Minions
         protected float shootSpeed;
         protected int shoot;
         protected bool rotateTowardsTarget = true;
+        protected bool overrideDamage = false;
+        protected int oDamage = 0;
+
 
         public virtual void CreateDust()
         {
@@ -211,7 +214,7 @@ namespace OtakuTech.Projectiles.Minions
                             }
                             shootVel.Normalize();
                             shootVel *= shootSpeed;
-                            int proj = Projectile.NewProjectile(new EntitySource_Misc("Hover Shooter"), Projectile.Center, shootVel, shoot, Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
+                            int proj = Projectile.NewProjectile(new EntitySource_Misc("Hover Shooter"), Projectile.Center, shootVel, shoot, overrideDamage? oDamage : Projectile.damage, Projectile.knockBack, Projectile.owner, 0f, 0f);
                             //projectile.spriteDirection = projectile.direction = shootVel.X < 0 ? -1 : 1;
                             float angleOffset = Projectile.direction < 0 ? 0f : 180f;
                             if (rotateTowardsTarget)

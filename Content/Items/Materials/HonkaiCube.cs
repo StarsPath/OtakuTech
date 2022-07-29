@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using OtakuTech.Content.NPCs;
-using OtakuTech.Content.NPCs.HonkaiBeasts.Eruption;
+using OtakuTech.Common.Eruption;
 using System;
 using Terraria;
 using Terraria.ID;

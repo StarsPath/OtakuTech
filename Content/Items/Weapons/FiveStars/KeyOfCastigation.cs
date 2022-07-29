@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using OtakuTech.Content.Buffs;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -31,8 +32,14 @@ namespace OtakuTech.Content.Items.Weapons.FiveStars
 			Item.useTurn = true;
 		}
 
+        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        {
+            base.OnHitNPC(player, target, damage, knockBack, crit);
+			target.AddBuff(ModContent.BuffType<TimeFracture>(), 120);
+        }
+
         public override void MeleeEffects(Player player, Rectangle hitbox) {
-			Main.NewText(hitbox);
+			//Main.NewText(hitbox);
 			int dust = Dust.NewDust(new Vector2(hitbox.X, hitbox.Y), hitbox.Width, hitbox.Height, DustID.PurpleTorch, 0f, 0f, 100, default(Color), 2f);
 			Main.dust[dust].noGravity = true;
 		}

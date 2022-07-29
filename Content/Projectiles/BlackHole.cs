@@ -32,10 +32,10 @@ namespace OtakuTech.Content.Projectiles
 			for(int i = 0; i < maxPull; i++)
             {
 				NPC npc = Main.npc[i];
-				float dist = Vector2.Distance(Projectile.position, npc.position);
+				float dist = Vector2.Distance(Projectile.Center, npc.Center);
 				if(dist < pullDist)
                 {
-					Vector2 dirTo = npc.position - Projectile.Center;
+					Vector2 dirTo = npc.Center - Projectile.Center;
 					dirTo.Normalize();
 					npc.velocity -= (dirTo * pullForce);
 					npc.velocity *= 0.90f;

@@ -14,7 +14,6 @@
     <Folder Include="Assets\Textures\Other\" />
     <Folder Include="Common\Players\" />
     <Folder Include="Content\Buffs\" />
-    <Folder Include="Content\Items\Weapons\PRI\" />
     <Folder Include="Content\Mounts\" />
     <Folder Include="Content\Tiles\" />
     <Folder Include="Localization\" />

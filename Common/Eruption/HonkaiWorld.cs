@@ -1,12 +1,11 @@
-﻿using OtakuTech.Content.NPCs.HonkaiBeasts.Eruption;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
 
-namespace OtakuTech.Content.NPCs
+namespace OtakuTech.Common.Eruption
 {
     public class HonkaiWorld : ModSystem
     {

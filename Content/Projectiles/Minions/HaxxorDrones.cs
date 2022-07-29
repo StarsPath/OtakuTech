@@ -22,7 +22,7 @@ namespace OtakuTech.Content.Projectiles.Minions
 
         public override void SetDefaults()
         {
-            //projectile.damage = 186 / 2;
+            Projectile.damage = 20;
             Projectile.netImportant = true;
             Projectile.width = 40;
             Projectile.height = 48;
@@ -33,15 +33,19 @@ namespace OtakuTech.Content.Projectiles.Minions
             Projectile.timeLeft = 30 * 60;
             Projectile.tileCollide = false;
             Projectile.ignoreWater = true;
+            Projectile.scale = 1f;
+            //Projectile.damage = 20;
+
             inertia = 20f;
             shoot = ProjectileID.Bullet;
             shootSpeed = 12f;
-            Projectile.scale = 1f;
             viewDist = 400f;
             chaseDist = 300f;
             spacingMult = 0.8f;
             shootCool = 20f;
             rotateTowardsTarget = false;
+            overrideDamage = true;
+            oDamage = 20;
         }
 
         public override void CheckActive()
@@ -55,6 +59,7 @@ namespace OtakuTech.Content.Projectiles.Minions
         }
         public override void AI()
         {
+            //Main.NewText(Projectile.damage);
             base.AI();
             Lighting.AddLight(Projectile.position, 0.28f, 0.82f, 1f);
         }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using OtakuTech.Common.Eruption;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace OtakuTech.Content.NPCs.HonkaiBeasts.Eruption
+namespace OtakuTech.Common.Eruption
 {
     public class HonkaiGlobalNPC: GlobalNPC
     {
@@ -12,8 +13,9 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts.Eruption
         {
             if(HonkaiWorld.honkaiInvasionActive && (Main.invasionX == (double)Main.spawnTileX))
             {
+                Player player = spawnInfo.Player;
                 pool.Clear();
-                foreach(int i in Eruption.invaders)
+                foreach (int i in Eruption.invaders_LV1)
                 {
                     pool.Add(i, 1f);
                 }
@@ -35,7 +37,7 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts.Eruption
         {
             if (HonkaiWorld.honkaiInvasionActive && (Main.invasionX == (double)Main.spawnTileX))
             {
-                npc.timeLeft = 1000;
+                npc.timeLeft = 60 * 60;
             }
             //base.PostAI(npc);
         }
@@ -44,8 +46,10 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts.Eruption
         {
             if (HonkaiWorld.honkaiInvasionActive && (Main.invasionX == (double)Main.spawnTileX))
             {
-                if (Eruption.invaders.Contains(npc.type))
+                if (Eruption.invaders_LV1.Contains(npc.type))
                     Main.invasionSize -= 1;
+                if (Eruption.invaders_LV2.Contains(npc.type))
+                    Main.invasionSize -= 2;
             }
             //base.NPCLoot(npc);
         }

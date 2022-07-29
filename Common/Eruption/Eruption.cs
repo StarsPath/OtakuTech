@@ -4,16 +4,29 @@ using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ID;
+using OtakuTech.Content.NPCs.HonkaiBeasts;
 
-namespace OtakuTech.Content.NPCs.HonkaiBeasts.Eruption
+namespace OtakuTech.Common.Eruption
 {
     public class Eruption
     {
-        public static int[] invaders =
+        public static int[] invaders_ALL =
         {
-            ModContent.NPCType<NPCs.HonkaiBeasts.AlloyChariot>(),
-            ModContent.NPCType<NPCs.HonkaiBeasts.Cassiel>(),
-            ModContent.NPCType<NPCs.HonkaiBeasts.Paladin>()
+            ModContent.NPCType<AlloyChariot>(),
+            ModContent.NPCType<Cassiel>(),
+            ModContent.NPCType<Paladin>(),
+            ModContent.NPCType<StormTemplar>()
+        };
+        public static int[] invaders_LV1 =
+        {
+            ModContent.NPCType<AlloyChariot>(),
+            ModContent.NPCType<Cassiel>(),
+            ModContent.NPCType<Paladin>()
+        };
+
+        public static int[] invaders_LV2 =
+        {
+            ModContent.NPCType<StormTemplar>()
         };
 
         public static void startInvasion()
@@ -156,9 +169,9 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts.Eruption
                 {
                     icon = 0;
                     int type = Main.npc[i].type;
-                    for (int n = 0; n < invaders.Length; n++)
+                    for (int n = 0; n < invaders_ALL.Length; n++)
                     {
-                        if (type == invaders[n])
+                        if (type == invaders_ALL[n])
                         {
                             Rectangle value = new Rectangle((int)(Main.npc[i].position.X + (float)(Main.npc[i].width / 2)) - num, (int)(Main.npc[i].position.Y + (float)(Main.npc[i].height / 2)) - num, num * 2, num * 2);
                             if (rectangle.Intersects(value))

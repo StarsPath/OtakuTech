@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using OtakuTech.Common.Players;
+using Terraria.Audio;
 
 namespace OtakuTech.Content.Projectiles
 {
@@ -40,11 +41,21 @@ namespace OtakuTech.Content.Projectiles
 
 			Projectile.rotation = Projectile.velocity.ToRotation() + MathHelper.ToRadians(90f);
 
-			int dust = Dust.NewDust(Projectile.position, 0, 0, DustID.GemTopaz);
+			int dust = Dust.NewDust(Projectile.Center, 0, 0, DustID.GemTopaz);
 			Main.dust[dust].scale = 0.5f;
 			Main.dust[dust].noGravity = true;
 			Lighting.AddLight(Projectile.position, 1f, 0.97f, 0.40f);
 		}
+
+        public override bool OnTileCollide(Vector2 oldVelocity)
+        {
+			Dust dust = Dust.NewDustDirect(Projectile.Center, 0, 0, DustID.GemTopaz, oldVelocity.X/2, oldVelocity.Y/2);
+			dust.scale = 1.5f;
+            dust.noGravity = true;
+			Collision.HitTiles(Projectile.position, Projectile.velocity, Projectile.width, Projectile.height);
+			SoundEngine.PlaySound(SoundID.Item10, Projectile.position);
+			return base.OnTileCollide(oldVelocity);
+        }
 
         public override bool PreDraw(ref Color lightColor)
         {

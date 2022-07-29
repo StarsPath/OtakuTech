@@ -69,7 +69,7 @@ namespace OtakuTech.Common.Players
         {
             //if (Player.HeldItem.ModItem is HekatesSombre || Player.HeldItem.ModItem is DomainOfVoid)
             if(Player.HeldItem.ModItem is DomainOfVoid ||
-                Player.HeldItem.ModItem is KeyOfOblivion)
+                Player.HeldItem.ModItem is KeyOfOblivion || Player.HeldItem.ModItem is DomainOfSentience)
                 enchanced = true;
             else
                 enchanced = false;
