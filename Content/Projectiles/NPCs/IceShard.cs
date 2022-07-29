@@ -29,6 +29,7 @@ namespace OtakuTech.Content.Projectiles.NPCs
 
 		public override void AI() {
 			//Main.NewText("projDMG "+projectile.damage);
+			Projectile.alpha = 185 - (Projectile.timeLeft / 2);
 			if (Projectile.velocity != default)
 			{
 				Projectile.frameCounter++;

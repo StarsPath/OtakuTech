@@ -32,7 +32,14 @@ namespace OtakuTech.Content.Items.Accessories
 
 		}
 
-		public override void UpdateAccessory(Player player, bool hideVisual)
+   //     public override void UpdateEquip(Player player)
+   //     {
+			//AttackPlayer attackPlayer = player.GetModPlayer<AttackPlayer>();
+			////attackPlayer.hitCount = 0;
+			//base.UpdateEquip(player);
+   //     }
+
+        public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			AttackPlayer attackPlayer = player.GetModPlayer<AttackPlayer>();
 			attackPlayer.bohiLeafEquiped = true;

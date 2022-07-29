@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using OtakuTech.Common.Eruption;
 using System;
 using Terraria;
 using Terraria.Audio;
@@ -116,7 +117,16 @@ namespace OtakuTech.Content.NPCs.Benares
 
         public override void OnKill()
         {
-            //Item.NewItem(npc.position, ModContent.ItemType<Items.Materials.HonkaiShard>());
+            HonkaiWorld.benaresActive = false;
+            HonkaiWorld.benaresDown = true;
+            Item.NewItem(new EntitySource_Loot(NPC), NPC.Center, ModContent.ItemType<Items.Materials.HonkaiCube>(), Main.rand.Next(1, 3));
+            Item.NewItem(new EntitySource_Loot(NPC), NPC.Center, ModContent.ItemType<Items.Placeables.ExpansionSupplyItem>(), 10);
+        }
+
+        public override void BossLoot(ref string name, ref int potionType)
+        {
+            potionType = ItemID.GreaterHealingPotion;
+            //base.BossLoot(ref name, ref potionType);
         }
 
         public override void OnHitByItem(Player player, Item item, int damage, float knockback, bool crit)

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using OtakuTech.Common.Players;
 using OtakuTech.Content.Projectiles;
+using OtakuTech.Content.Tiles;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
@@ -45,7 +46,17 @@ namespace OtakuTech.Content.Items.Weapons.FiveStars
 			Item.UseSound = SoundID.Item1;
 		}
 
-        public override bool AltFunctionUse(Player player)
+		public override void AddRecipes()
+		{
+			Recipe recipe = CreateRecipe();
+			recipe.AddIngredient(ModContent.ItemType<SentienceChain>());
+			recipe.AddIngredient(ModContent.ItemType<SentienceSpear>());
+			recipe.AddIngredient(ModContent.ItemType<SentienceSword>());
+			recipe.AddTile(ModContent.TileType<ProgramingStation>());
+			recipe.Register();
+		}
+
+		public override bool AltFunctionUse(Player player)
         {
             return true;
         }

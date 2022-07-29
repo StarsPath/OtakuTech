@@ -12,12 +12,16 @@ namespace OtakuTech.Common.Eruption
         public static string invasionName = "honkaiEruption";
         public static bool honkaiInvasionActive = false;
         public static bool honkaiInvasionDown = false;
+        public static bool benaresActive = false;
+        public static bool benaresDown = false;
 
         public override void OnWorldLoad()
         {
             Main.invasionSize = 0;
             honkaiInvasionActive = false;
             honkaiInvasionDown = false;
+            benaresActive = false;
+            benaresDown = false;
             //base.Initialize();
         }
 
@@ -26,6 +30,8 @@ namespace OtakuTech.Common.Eruption
             Main.invasionSize = 0;
             honkaiInvasionActive = false;
             honkaiInvasionDown = false;
+            benaresActive = false;
+            benaresDown = false;
         }
 
         public override void SaveWorldData(TagCompound tag)
@@ -33,6 +39,8 @@ namespace OtakuTech.Common.Eruption
             var downed = new List<string>();
             if (honkaiInvasionDown)
                 downed.Add(invasionName);
+            if (benaresDown)
+                downed.Add("benares");
 
             tag["downed"] = downed;
 
@@ -48,6 +56,7 @@ namespace OtakuTech.Common.Eruption
         {
             var downed = tag.GetList<string>("downed");
             honkaiInvasionDown = downed.Contains(invasionName);
+            benaresDown = downed.Contains("benares");
             //base.Load(tag);
         }
 
@@ -55,6 +64,7 @@ namespace OtakuTech.Common.Eruption
         {
             BitsByte flags = new BitsByte();
             flags[0] = honkaiInvasionDown;
+            flags[1] = benaresDown;
             writer.Write(flags);
             //base.NetSend(writer);
         }
@@ -62,6 +72,7 @@ namespace OtakuTech.Common.Eruption
         {
             BitsByte flags = reader.ReadByte();
             honkaiInvasionDown = flags[0];
+            benaresDown = flags[1];
             //base.NetReceive(reader);
         }
 
@@ -75,6 +86,10 @@ namespace OtakuTech.Common.Eruption
                     Eruption.CheckCustomInvasionProgress();
                 }
                 Eruption.UpdateInvasion();
+            }
+            if (honkaiInvasionDown)
+            {
+
             }
             //base.PostUpdate();
         }

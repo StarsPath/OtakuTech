@@ -4,6 +4,9 @@ using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using OtakuTech.Content.Projectiles;
+using OtakuTech.Content.Items.Weapons.FiveStars;
+using OtakuTech.Content.Items.Materials;
+using OtakuTech.Content.Tiles;
 
 namespace OtakuTech.Content.Items.Weapons.PRI
 {
@@ -40,15 +43,16 @@ namespace OtakuTech.Content.Items.Weapons.PRI
 			//item.shootSpeed = 5f;
 		}
 
-        //public override void AddRecipes() {
-        //	Recipe recipe = CreateRecipe();
-        //	recipe.AddIngredient(ModContent.ItemType<IceEpiphyllum>());
-        //	recipe.AddIngredient(ModContent.ItemType<EinsteinsTorus>(), 10);
-        //	recipe.AddIngredient(ModContent.ItemType<SCMetalH2>(), 10);
-        //	recipe.AddIngredient(ModContent.ItemType<Nanoceramic>(), 10);
-        //	recipe.AddTile(ModContent.TileType<ProgramingStation>());
-        //	recipe.Register();
-        //}
+        public override void AddRecipes()
+        {
+            Recipe recipe = CreateRecipe();
+            recipe.AddIngredient(ModContent.ItemType<IceEpiphyllum>());
+            recipe.AddIngredient(ModContent.ItemType<EinsteinsTorus>(), 10);
+            recipe.AddIngredient(ModContent.ItemType<SCMetalH2>(), 10);
+            recipe.AddIngredient(ModContent.ItemType<Nanoceramic>(), 10);
+            recipe.AddTile(ModContent.TileType<ProgramingStation>());
+            recipe.Register();
+        }
 
         public override bool AltFunctionUse(Player player) {
 			return true;

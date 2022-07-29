@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent;
 using ReLogic.Content;
 using OtakuTech.Common.Players;
+using OtakuTech.Content.Items.Weapons.FiveStars;
+using OtakuTech.Content.Items.Materials;
+using OtakuTech.Content.Tiles;
 
 namespace OtakuTech.Content.Items.Weapons.PRI
 {
@@ -44,17 +47,18 @@ namespace OtakuTech.Content.Items.Weapons.PRI
 			Item.shootSpeed = 1f;
 		}
 
-		//public override void AddRecipes() {
-		//	Recipe recipe = CreateRecipe();
-		//	recipe.AddIngredient(ModContent.ItemType<MightOfAnUtu>());
-		//	recipe.AddIngredient(ModContent.ItemType<EinsteinsTorus>(), 10);
-		//	recipe.AddIngredient(ModContent.ItemType<SCMetalH2>(), 10);
-		//	recipe.AddIngredient(ModContent.ItemType<Nanoceramic>(), 10);
-		//	recipe.AddTile(ModContent.TileType<ProgramingStation>());
-		//	recipe.Register();
-		//}
+        public override void AddRecipes()
+        {
+            Recipe recipe = CreateRecipe();
+            recipe.AddIngredient(ModContent.ItemType<MightOfAnUtu>());
+            recipe.AddIngredient(ModContent.ItemType<EinsteinsTorus>(), 10);
+            recipe.AddIngredient(ModContent.ItemType<SCMetalH2>(), 10);
+            recipe.AddIngredient(ModContent.ItemType<Nanoceramic>(), 10);
+            recipe.AddTile(ModContent.TileType<ProgramingStation>());
+            recipe.Register();
+        }
 
-		public override bool AltFunctionUse(Player player) {
+        public override bool AltFunctionUse(Player player) {
 			return true;
 		}
 

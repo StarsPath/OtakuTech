@@ -10,11 +10,11 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
     public class StormTemplar : ModNPC
     {
         private float jumpDist = 100f;
-        private float maxJumpHeight = 4f;
+        private float maxJumpHeight = 6f;
         private float maxJumpDist = 300f;
         private float jump_cd = 180; //6 sec
 
-        private float movementSpeed = 1f;
+        private float movementSpeed = 2.5f;
         //private float max_Xspeed = 2.5f;
 
         private float stuck_threashold = 300;
@@ -89,7 +89,8 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
 
         public override void OnKill()
         {
-            Item.NewItem(new EntitySource_Loot(NPC), NPC.position, 0, 0, ModContent.ItemType<Items.Materials.HonkaiShard>());
+            if (Main.rand.NextFloat() < 0.05f)
+                Item.NewItem(new EntitySource_Loot(NPC), NPC.position, 0, 0, ModContent.ItemType<Items.Materials.HonkaiShard>());
         }
         public override void AI()
         {

@@ -72,7 +72,8 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
 
         public override void OnKill()
         {
-            Item.NewItem(new EntitySource_Loot(NPC), NPC.position, 0, 0, ModContent.ItemType<Items.Materials.HonkaiShard>());
+            if (Main.rand.NextFloat() < 0.025f)
+                Item.NewItem(new EntitySource_Loot(NPC), NPC.position, 0, 0, ModContent.ItemType<Items.Materials.HonkaiShard>());
         }
         public override void AI()
         {

@@ -15,7 +15,7 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
         private float jump_cd = 180; //6 sec
         private float bounceCount = 4;
 
-        private float movementSpeed = 3f;
+        private float movementSpeed = 3.5f;
         //private float max_Xspeed = 2.5f;
 
         private float stuck_threashold = 300;
@@ -87,7 +87,8 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
 
         public override void OnKill()
         {
-            Item.NewItem(new EntitySource_Loot(NPC), NPC.position, 0, 0, ModContent.ItemType<Items.Materials.HonkaiShard>());
+            if (Main.rand.NextFloat() < 0.05f)
+                Item.NewItem(new EntitySource_Loot(NPC), NPC.position, 0, 0, ModContent.ItemType<Items.Materials.HonkaiShard>());
         }
         public override void AI()
         {

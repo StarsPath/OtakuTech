@@ -1,8 +1,10 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using OtakuTech.Common.Players;
+using OtakuTech.Content.Items.Materials;
 using OtakuTech.Content.Items.Weapons.FiveStars;
 using OtakuTech.Content.Projectiles;
+using OtakuTech.Content.Tiles;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
@@ -46,6 +48,17 @@ namespace OtakuTech.Content.Items.Weapons.PRI
             Item.autoReuse = true;
 
             Item.UseSound = SoundID.Item1;
+        }
+
+        public override void AddRecipes()
+        {
+            Recipe recipe = CreateRecipe();
+            recipe.AddIngredient(ModContent.ItemType<KeyOfOblivion>());
+            recipe.AddIngredient(ModContent.ItemType<EinsteinsTorus>(), 10);
+            recipe.AddIngredient(ModContent.ItemType<SCMetalH2>(), 10);
+            recipe.AddIngredient(ModContent.ItemType<Nanoceramic>(), 10);
+            recipe.AddTile(ModContent.TileType<ProgramingStation>());
+            recipe.Register();
         }
 
         public override bool AltFunctionUse(Player player)

@@ -14,11 +14,11 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
         private float maxJumpDist = 500f;
         private float jump_cd = 180; //6 sec
 
-        private float movementSpeed = 2.5f;
+        private float movementSpeed = 3f;
         //private float max_Xspeed = 2.5f;
 
-        private float stuck_threashold = 300;
-        private bool stuckX;
+        //private float stuck_threashold = 300;
+        //private bool stuckX;
 
         private float localTimer = 0;
         private float randomNum = 300;
@@ -42,11 +42,11 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
             get => NPC.ai[AI_Timer_Slot];
             set => NPC.ai[AI_Timer_Slot] = value;
         }
-        public float Stuck_Timer
-        {
-            get => NPC.ai[AI_Stuck_Timer_Slot];
-            set => NPC.ai[AI_Stuck_Timer_Slot] = value;
-        }
+        //public float Stuck_Timer
+        //{
+        //    get => NPC.ai[AI_Stuck_Timer_Slot];
+        //    set => NPC.ai[AI_Stuck_Timer_Slot] = value;
+        //}
 
         private int fpt = 4;
         public override void SetStaticDefaults()
@@ -77,7 +77,8 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
 
         public override void OnKill()
         {
-            Item.NewItem(new EntitySource_Loot(NPC), NPC.position, 0, 0, ModContent.ItemType<Items.Materials.HonkaiShard>());
+            if(Main.rand.NextFloat() < 0.025f)
+                Item.NewItem(new EntitySource_Loot(NPC), NPC.position, 0, 0, ModContent.ItemType<Items.Materials.HonkaiShard>());
         }
         public override void AI()
         {
@@ -142,7 +143,6 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
             {
                 if (NPC.collideY)
                 {
-                    NPC.velocity.X = 0;
                     AI_State = State_idle;
                 }
             }
@@ -161,28 +161,28 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
                 NPC.defense = 20;
                 NPC.damage = 80;
             }
-            if (NPC.collideX)
-            {
-                Collision.StepUp(ref NPC.position, ref NPC.velocity, NPC.width, NPC.height, ref NPC.stepSpeed, ref NPC.gfxOffY);
-                stuckX = true;
-                Stuck_Timer++;
-            }
-            else
-            {
-                stuckX = false;
-            }
+            //if (NPC.collideX)
+            //{
+            //    Collision.StepUp(ref NPC.position, ref NPC.velocity, NPC.width, NPC.height, ref NPC.stepSpeed, ref NPC.gfxOffY);
+            //    stuckX = true;
+            //    Stuck_Timer++;
+            //}
+            //else
+            //{
+            //    stuckX = false;
+            //}
                 
 
 
-            if(Stuck_Timer >= stuck_threashold)
-            {
-                if(stuckX)
-                {
-                    NPC.velocity.Y += -maxJumpHeight;
-                    NPC.velocity.X = NPC.direction * movementSpeed;
-                }
-                Stuck_Timer = 0;
-            }
+            //if(Stuck_Timer >= stuck_threashold)
+            //{
+            //    if(stuckX)
+            //    {
+            //        NPC.velocity.Y += -maxJumpHeight;
+            //        NPC.velocity.X = NPC.direction * movementSpeed;
+            //    }
+            //    Stuck_Timer = 0;
+            //}
 
             int tileX = (int)NPC.Bottom.X / 16;
             int tileY = (int)NPC.Bottom.Y / 16;

@@ -51,6 +51,8 @@ namespace OtakuTech.Content.Items.Placeables
                     ModContent.ItemType<HonkaiShard>(),
                     //ModContent.ItemType<VoidWings>(),
                     //ModContent.ItemType<CarKey>(),
+                    ModContent.ItemType<UndinesTale>(),
+                    ModContent.ItemType<ZithersLament>(),
                     ModContent.ItemType<OathOfJudah>(),
                     ModContent.ItemType<ObscuringWing>(),
                     ModContent.ItemType<CrusherBunny19C>(),

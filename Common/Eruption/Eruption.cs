@@ -15,7 +15,8 @@ namespace OtakuTech.Common.Eruption
             ModContent.NPCType<AlloyChariot>(),
             ModContent.NPCType<Cassiel>(),
             ModContent.NPCType<Paladin>(),
-            ModContent.NPCType<StormTemplar>()
+            ModContent.NPCType<StormTemplar>(),
+            ModContent.NPCType<Crab>()
         };
         public static int[] invaders_LV1 =
         {
@@ -26,7 +27,8 @@ namespace OtakuTech.Common.Eruption
 
         public static int[] invaders_LV2 =
         {
-            ModContent.NPCType<StormTemplar>()
+            ModContent.NPCType<StormTemplar>(),
+            ModContent.NPCType<Crab>()
         };
 
         public static void startInvasion()
@@ -49,7 +51,7 @@ namespace OtakuTech.Common.Eruption
                 {
                     Main.invasionType = -1;
                     HonkaiWorld.honkaiInvasionActive = true;
-                    Main.invasionSize = 100 * numPlayer;
+                    Main.invasionSize = 120 * (Main.hardMode? 1 : 2) * numPlayer;
                     Main.invasionSizeStart = Main.invasionSize;
                     Main.invasionProgress = 0;
                     Main.invasionProgressIcon = 3;
@@ -75,11 +77,11 @@ namespace OtakuTech.Common.Eruption
             String text = "";
             if (Main.invasionX == (double)Main.spawnTileX)
             {
-                text = "Custom invasion has reached the spawn position!";
+                text = "Honkai eruprion has reached the spawn position!";
             }
             if (Main.invasionSize <= 0)
             {
-                text = "Custom invasion has been defeated.";
+                text = "Honkai eruprion has been defeated.";
             }
             if (Main.netMode == 0)
             {
