@@ -1,6 +1,8 @@
 using Microsoft.Xna.Framework.Graphics;
+using OtakuTech.Content.Items.Materials;
 using ReLogic.Content;
 using Terraria;
+using Terraria.GameContent.UI;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ID;
@@ -12,6 +14,7 @@ namespace OtakuTech
 	public class OtakuTech : Mod
 	{
         public static Effect TimeFracture;
+        public static int CrystalCurrencyId;
         public override void Load()
         {
             if (Main.netMode != NetmodeID.Server)
@@ -20,6 +23,8 @@ namespace OtakuTech
                 Filters.Scene["TimeFracture"] = new Filter(new ScreenShaderData("FilterMiniTower").UseColor(0.8f, 0f, 0.8f).UseOpacity(0.50f), EffectPriority.High);
                 Filters.Scene.Load();
             }
+
+            CrystalCurrencyId = CustomCurrencyManager.RegisterCurrency(new Content.Currencies.CrystalCurrency(ModContent.ItemType<Crystal>(), 999L, "Mods.OtakuTech.Currencies.CrystalCurrency"));
             //base.Load();
         }
         public override void AddRecipeGroups()

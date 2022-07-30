@@ -51,7 +51,7 @@ namespace OtakuTech.Common.Eruption
                 {
                     Main.invasionType = -1;
                     HonkaiWorld.honkaiInvasionActive = true;
-                    Main.invasionSize = 120 * (Main.hardMode? 1 : 2) * numPlayer;
+                    Main.invasionSize = 120 * (Main.hardMode? 2 : 1) * numPlayer;
                     Main.invasionSizeStart = Main.invasionSize;
                     Main.invasionProgress = 0;
                     Main.invasionProgressIcon = 3;

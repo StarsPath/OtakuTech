@@ -89,6 +89,8 @@ namespace OtakuTech.Content.NPCs.HonkaiBeasts
         {
             if (Main.rand.NextFloat() < 0.05f)
                 Item.NewItem(new EntitySource_Loot(NPC), NPC.position, 0, 0, ModContent.ItemType<Items.Materials.HonkaiShard>());
+            if (Main.rand.NextFloat() < 0.1f)
+                Item.NewItem(new EntitySource_Loot(NPC), NPC.position, 0, 0, ModContent.ItemType<Items.Materials.Crystal>());
         }
         public override void AI()
         {

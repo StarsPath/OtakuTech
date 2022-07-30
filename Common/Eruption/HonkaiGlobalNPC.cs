@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -52,6 +53,9 @@ namespace OtakuTech.Common.Eruption
 
         public override void OnKill(NPC npc)
         {
+            if (Main.rand.NextFloat() < 0.01f)
+                Item.NewItem(new EntitySource_Loot(npc), npc.Center, 0, 0, ModContent.ItemType<Content.Items.Materials.HonkaiShard>());
+
             if (HonkaiWorld.honkaiInvasionActive && (Main.invasionX == (double)Main.spawnTileX))
             {
                 if (Eruption.invaders_LV1.Contains(npc.type))
